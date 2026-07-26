@@ -1,4 +1,4 @@
-<!doctype html>
+<welcome>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
@@ -92,8 +92,8 @@
         <!-- 主内容由 JS 渲染 -->
         <div id="welcomeView">
           <h2 style="margin-top:0;color:#400022">欢迎来到 Happy Time</h2>
-          <p style="color:var(--muted)">这是一个静态单文件博客示例（index.html）。文章与评论都保存在你的浏览器本地（localStorage）。如需公开访问，请部署到服务器并绑定域名。</p>
-          <p>点击左侧文章查看详情，或使用上方按钮查看部署说明。</p>
+          <p style="color:var(--muted)">这是我的个人网站。</p>
+          <p>点击左侧文章查看我的博客内容。</p>
         </div>
 
         <div id="postView" style="display:none">
@@ -124,9 +124,9 @@
     const posts = [
       {
         slug: "welcome",
-        title: "欢迎来到博客",
+        title: "欢迎来到我的博客",
         date: "2026-07-26",
-        summary: "这是一个使用静态单文件实现的示例文章。",
+        summary: "哈哈哈哈哈我的第二个博客终于写完了。",
         tags: ["demo", "nextjs"],
         content: `
 <p>这是第一篇示例文章，支持 <strong>静态 HTML</strong> 内容。</p>
@@ -135,11 +135,11 @@
 `
       },
       {
-        slug: "blog-architecture",
-        title: "如何设计博客架构（概述）",
+        slug: "blog-第一篇",
+        title: "这是本博客诞生的第一天",
         date: "2026-07-27",
-        summary: "简述推荐的博客技术栈与架构思路。",
-        tags: ["architecture","web"],
+        summary: "随便做了一个主题，不知道你喜不喜欢，反正我很喜欢。",
+        tags: ["第一篇","web"],
         content: `
 <p>推荐使用 Next.js + MDX + Prisma（Postgres）构建一个可扩展的博客。</p>
 <ul>

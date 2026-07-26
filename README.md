@@ -93,7 +93,7 @@
         <div id="welcomeView">
           <h2 style="margin-top:0;color:#400022">欢迎来到 Happy Time</h2>
           <p style="color:var(--muted)">这是我的个人网站。</p>
-          <p>点击左侧文章查看我的博客内容。</p>
+          <p>点击左侧文章查看我的博客内容，您可以在每篇博客的最后留下评论。</p>
         </div>
 
         <div id="postView" style="display:none">
@@ -125,29 +125,28 @@
       {
         slug: "welcome",
         title: "欢迎来到我的博客",
-        date: "2026-07-26",
+        date: "2026-07-27",
         summary: "哈哈哈哈哈我的第二个博客终于写完了。",
-        tags: ["demo", "nextjs"],
+        tags: ["第二篇", "nacy"],
         content: `
-<p>这是第一篇示例文章，支持 <strong>静态 HTML</strong> 内容。</p>
-<p>你可以写 Markdown （已转为 HTML）、内嵌图片或更多说明。</p>
-<p>此页面为单文件静态站点示例，评论保存在本地浏览器（localStorage）。</p>
+<p>至于为什么是第二博客？</p>
+<p>因为第一个博客忘记网址了。</p>
+<p>所以第二个博客我全程在后端写。</p>
 `
       },
       {
         slug: "blog-第一篇",
         title: "这是本博客诞生的第一天",
-        date: "2026-07-27",
+        date: "2026-07-26",
         summary: "随便做了一个主题，不知道你喜不喜欢，反正我很喜欢。",
-        tags: ["第一篇","web"],
+        tags: ["第一篇","nacy"],
         content: `
-<p>推荐使用 Next.js + MDX + Prisma（Postgres）构建一个可扩展的博客。</p>
+<p>写博客的原因很简单</p>
 <ul>
-<li>前端：Next.js（App Router）、MDX 渲染</li>
-<li>后端：Postgres + Prisma；缓存 Redis，可选 Algolia 搜索</li>
-<li>部署：Vercel 或 Docker/Trafik 自托管</li>
+<li>这个暑假真的很无聊。</li>
+<li>所以，简单写了一个网站。</li>
 </ul>
-<p>上面是简要概览；原项目还包含评论 API、示例 MDX 内容与部署脚本。</p>
+<p>对，就这么简单。</p>
 `
       }
     ];

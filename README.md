@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
@@ -106,7 +107,23 @@
     .fairy{right:10%;bottom:6%;width:160px;filter:drop-shadow(0 8px 24px rgba(255,200,230,0.08))}
     .crystals{left:62%;top:56%;width:130px;opacity:0.95}
 
-    .stars{position:absolute;inset:8px;pointer-events:none;z-index:1;border-radius:20px;overflow:hidden}
+    /* scene image styling (插入的 lolo.png 会使用此类) */
+    .scene-img{
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:18px;
+      pointer-events:none;
+      z-index:1;
+      opacity:0.98;
+      transform-origin:center;
+      transition:transform .12s linear;
+      will-change:transform, opacity;
+    }
+
+    .stars{position:absolute;inset:8px;pointer-events:none;z-index:3;border-radius:20px;overflow:hidden}
     .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85;animation: twinkle 3.6s infinite ease-in-out;}
     @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }}
 
@@ -210,6 +227,7 @@
       .log-entry{flex-direction:column}
       .log-meta{flex-direction:row;width:auto}
       .log-thumb{width:100%;height:160px}
+      .scene-img{opacity:0.9}
     }
 
     /* small helper */
@@ -268,13 +286,16 @@
           <div class="scene" id="scene">
             <div class="stars" id="stars"></div>
 
+            <!-- 插入的场景图片：请将 lolo.png 放在与此 index.html 同一目录 -->
+            <img id="sceneImage" class="scene-img" src="lolo.png" alt="场景插图 lolo" loading="eager" />
+
             <div class="castle" id="castle">
-              <!-- simplified castle svg -->
+              <!-- simplified castle svg (overlay) -->
               <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 <defs>
                   <linearGradient id="gSky" x1="0" x2="1"><stop offset="0" stop-color="#E9F6FF"/><stop offset="1" stop-color="#F9EEFF"/></linearGradient>
                 </defs>
-                <rect x="0" y="0" width="640" height="420" rx="24" fill="url(#gSky)" opacity="0.95"/>
+                <rect x="0" y="0" width="640" height="420" rx="24" fill="url(#gSky)" opacity="0.0"/>
               </svg>
             </div>
 
@@ -552,7 +573,7 @@
       }
     })();
 
-    // Parallax subtle tilt based on mouse move
+    // Parallax subtle tilt based on mouse move — now also moves scene image
     (function sceneParallax(){
       const scene = document.getElementById('scene');
       const items = [
@@ -560,11 +581,18 @@
         document.getElementById('fairy'),
         document.getElementById('crystals')
       ];
+      const sceneImg = document.getElementById('sceneImage');
       if(!scene) return;
       scene.addEventListener('mousemove', (e) => {
         const r = scene.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
         const py = (e.clientY - r.top) / r.height - 0.5;
+        // subtle movement for background image (less depth)
+        if(sceneImg){
+          const tx = px * 8; // horizontal shift
+          const ty = py * -6; // vertical shift (invert)
+          sceneImg.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.01)`;
+        }
         items.forEach((it, idx) => {
           if(!it) return;
           const depth = (idx+1) * 4;
@@ -574,6 +602,7 @@
         });
       });
       scene.addEventListener('mouseleave', ()=>{
+        if(sceneImg) sceneImg.style.transform='none';
         items.forEach(it=> { if(it) it.style.transform='none' });
       });
     })();

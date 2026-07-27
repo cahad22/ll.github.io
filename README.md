@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
@@ -382,8 +381,8 @@
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-1-title" class="log-title">千年之后，如果人类文明还存在</h4>
-            <p class="log-excerpt">本次尝试以低对比度的紫粉与奶油金为主，控制高光区域的柔化，重点在于云朵边框的渐变自然过渡与星光的层次感处理。</p>
+            <h4 id="log-1-title" class="log-title">给千年后读到这段文字的你</h4>
+            <p class="log-excerpt">如果你正在读这段文字，说明Github的代码库已经过了一千年。不过你是人类、AI，还是其他什么存在，你好。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(1)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 2 分钟</div>

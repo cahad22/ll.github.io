@@ -227,8 +227,8 @@
           </svg>
         </div>
         <div>
-          <div class="title">童话梦境 · Cahad</div>
-          <div style="font-size:12px;color:var(--muted)">梦幻插画 & 个人日志</div>
+          <div class="title">Nacy的赛博世界</div>
+          <div style="font-size:12px;color:var(--muted)">个人网站</div>
         </div>
       </div>
 
@@ -247,7 +247,7 @@
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-left">
-          <div class="kicker">作者Nacy（大美女）</div>
+          <div class="kicker">作者Nacy</div>
           <h1 class="hero-title">欢迎来到<br/><small style="font-weight:500;color:#6b5b79">我的赛博世界</small></h1>
           <p class="hero-sub">本站建于2026/7/27。</p>
 
@@ -343,8 +343,8 @@
           <div class="progress"><i style="width:86%"></i></div>
         </div>
         <div class="skill-card" role="listitem">
-          <h4>第三章：诗神现世。</h4>
-          <p style="margin:6px 0;color:#6b5b7d">诗神（自封）的诗词鉴赏。</p>
+          <h4>第三章：围棋。</h4>
+          <p style="margin:6px 0;color:#6b5b7d">下围棋，但赢不了AI。</p>
           <div class="progress"><i style="width:88%"></i></div>
         </div>
       </div>
@@ -407,15 +407,15 @@
 
         <article class="log-entry" aria-labelledby="log-3-title">
           <div class="log-meta" aria-hidden="true">
-            <div class="log-date">2026-05-10</div>
+            <div class="log-date">2026-07-10</div>
             <div class="log-tags">
-              <span class="pill">诗神</span>
-              <span class="pill">诗歌</span>
+              <span class="pill">围棋</span>
+              <span class="pill">时光</span>
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-3-title" class="log-title">诗神（自封）的诗词鉴赏。</h4>
-            <p class="log-excerpt">早期草稿主要围绕“轻盈”与“梦幻”两点，尝试不同羽翼造型与配色方案，记录了 6 版小稿的优缺点。</p>
+            <h4 id="log-3-title" class="log-title">围棋</h4>
+            <p class="log-excerpt">下围棋，但赢不了AI。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(3)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 4 分钟</div>

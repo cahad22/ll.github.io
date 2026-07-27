@@ -57,6 +57,10 @@
       mix-blend-mode:screen;
       z-index:0;
       opacity:0.95;
+
+      /* 新增：缓慢浮动效果（云朵上下微幅移动与轻微旋转） */
+      animation: float-clouds 36s ease-in-out infinite;
+      transform-origin: center;
     }
     /* 细微颗粒噪点（轻微质感） */
     body::after{
@@ -68,6 +72,12 @@
       background-size: 8px 8px;
       z-index:0;
       opacity:0.95;
+    }
+
+    @keyframes float-clouds {
+      0%   { transform: translateY(0px) rotate(0deg); }
+      50%  { transform: translateY(-14px) rotate(0.2deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
     }
 
     a{color:inherit; text-decoration:none}
@@ -268,13 +278,13 @@
     .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
     /* ============================
-       装饰性：果冻蝴蝶结与钻石糖果
+       装饰性：果冻蝴蝶结与（钻石装饰已移除）
        - .enchanted : 用在按钮 / CTA / pill 等需要点缀的元素
        - .card-accent : 用在卡片右上/右下的点缀
        ============================ */
 
     .enchanted{position:relative;overflow:visible}
-    /* 果冻蝴蝶结（左上角） */
+    /* 果冻蝴蝶结（左上角） - 保留 */
     .enchanted::before{
       content:"";
       position:absolute;
@@ -288,29 +298,6 @@
       transform: rotate(-6deg);
       filter: drop-shadow(0 6px 10px rgba(255,200,240,0.12));
       pointer-events:none;
-    }
-
-    /* 闪耀钻石糖果（右上角） */
-    .enchanted::after{
-      content:"";
-      position:absolute;
-      right:-8px;
-      top:-8px;
-      width:18px;
-      height:18px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'><polygon points='9,1 13,6 9,17 5,6' fill='%23FFF8FF' stroke='%23FFD6E8' stroke-width='0.8' opacity='0.98' /><circle cx='9' cy='6' r='1.4' fill='%23FFF0FF' opacity='0.95' /></svg>");
-      background-size:contain;
-      background-repeat:no-repeat;
-      transform: rotate(10deg);
-      filter: drop-shadow(0 6px 12px rgba(240,220,255,0.12)) saturate(120%);
-      animation: candy-sparkle 2.2s infinite ease-in-out;
-      pointer-events:none;
-    }
-
-    @keyframes candy-sparkle {
-      0% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
-      50% { transform: rotate(12deg) scale(1.08); opacity:1; }
-      100% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
     }
 
     /* card 角落点缀（右下） */
@@ -335,10 +322,6 @@
       50% { transform: translateY(-6px); opacity:1 }
       100% { transform: translateY(0); opacity:0.95 }
     }
-
-    /* 让小 pill 也带点喜感 */
-    .pill.enchanted{padding-right:28px; padding-left:12px}
-    .pill.enchanted::after{ right:8px; top:50%; transform: translateY(-50%) rotate(20deg); }
 
     /* 微调：CTA 特别发光 */
     .cta.enchanted{

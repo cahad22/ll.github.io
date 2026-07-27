@@ -157,8 +157,8 @@
     }
 
     .stars{position:absolute;inset:8px;pointer-events:none;z-index:3;border-radius:20px;overflow:hidden}
-    .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85;animation: twinkle 3.6s infinite ease-in-out;}
-    @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }}
+    .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85; /* twinkle removed */ animation: none;}
+    /* @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }} */
 
     /* ========== Main Sections ========== */
     main{position:relative;z-index:2}
@@ -268,13 +268,13 @@
     .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
     /* ============================
-       装饰性：果冻蝴蝶结与钻石糖果
+       装饰性：果冻蝴蝶结（保留）与（钻石装饰已移除）
        - .enchanted : 用在按钮 / CTA / pill 等需要点缀的元素
        - .card-accent : 用在卡片右上/右下的点缀
        ============================ */
 
     .enchanted{position:relative;overflow:visible}
-    /* 果冻蝴蝶结（左上角） */
+    /* 果冻蝴蝶结（左上角） - 保留 */
     .enchanted::before{
       content:"";
       position:absolute;
@@ -290,55 +290,9 @@
       pointer-events:none;
     }
 
-    /* 闪耀钻石糖果（右上角） */
-    .enchanted::after{
-      content:"";
-      position:absolute;
-      right:-8px;
-      top:-8px;
-      width:18px;
-      height:18px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'><polygon points='9,1 13,6 9,17 5,6' fill='%23FFF8FF' stroke='%23FFD6E8' stroke-width='0.8' opacity='0.98' /><circle cx='9' cy='6' r='1.4' fill='%23FFF0FF' opacity='0.95' /></svg>");
-      background-size:contain;
-      background-repeat:no-repeat;
-      transform: rotate(10deg);
-      filter: drop-shadow(0 6px 12px rgba(240,220,255,0.12)) saturate(120%);
-      animation: candy-sparkle 2.2s infinite ease-in-out;
-      pointer-events:none;
-    }
+    /* 闪耀钻石糖果（右上角） 已移除 */
 
-    @keyframes candy-sparkle {
-      0% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
-      50% { transform: rotate(12deg) scale(1.08); opacity:1; }
-      100% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
-    }
-
-    /* card 角落点缀（右下） */
-    .card-accent{position:relative;overflow:visible}
-    .card-accent::after{
-      content:"";
-      position:absolute;
-      right:12px;
-      bottom:12px;
-      width:28px;
-      height:28px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><rect x='0' y='0' width='28' height='28' rx='6' fill='%23FFF6F9' opacity='0.95'/><polygon points='14,3 19,11 14,25 9,11' fill='%23FFEFFE' opacity='0.95' stroke='%23FFD6E8' stroke-width='0.6'/></svg>");
-      background-size:contain;
-      background-repeat:no-repeat;
-      filter: drop-shadow(0 10px 22px rgba(200,160,220,0.06));
-      pointer-events:none;
-      animation: float-accent 4s ease-in-out infinite;
-    }
-
-    @keyframes float-accent {
-      0% { transform: translateY(0); opacity:0.95 }
-      50% { transform: translateY(-6px); opacity:1 }
-      100% { transform: translateY(0); opacity:0.95 }
-    }
-
-    /* 让小 pill 也带点喜感 */
-    .pill.enchanted{padding-right:28px; padding-left:12px}
-    .pill.enchanted::after{ right:8px; top:50%; transform: translateY(-50%) rotate(20deg); }
+    /* 卡片右下角点缀（已移除） */
 
     /* 微调：CTA 特别发光 */
     .cta.enchanted{
@@ -674,7 +628,7 @@
       document.getElementById('contactForm').reset();
     }
 
-    // Create twinkling stars in scene
+    // Create twinkling stars in scene (stars are still created, but twinkle animation disabled)
     (function createStars(){
       const starWrap = document.getElementById('stars');
       if(!starWrap) return;
@@ -689,8 +643,7 @@
         s.style.top = top + '%';
         s.style.width = size + 'px';
         s.style.height = size + 'px';
-        s.style.animationDuration = (2 + Math.random()*3) + 's';
-        s.style.animationDelay = Math.random()*3 + 's';
+        // animation removed in CSS; keep small random delay/scale if needed later
         starWrap.appendChild(s);
       }
     })();

@@ -462,4 +462,200 @@
               <div style="color:#7a6a85;font-size:13px">阅读需 2 分钟</div>
             </div>
           </div>
-          <div class="
+         <div class="log-thumb" aria-hidden="true">
+            <svg width="100%" height="100%" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" rx="8" fill="#F9F1FF"/>
+              <text x="50%" y="52%" font-family="Poppins,Arial" font-size="12" fill="#6b5b79" text-anchor="middle">素材笔记</text>
+            </svg>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- a simple modal for reading logs -->
+      <div id="logModal" aria-hidden="true" style="display:none;position:fixed;inset:0;background:rgba(24,12,36,0.45);backdrop-filter: blur(6px);z-index:120;align-items:center;justify-content:center;padding:24px;">
+        <div style="max-width:880px;width:100%;background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,255,255,0.95));border-radius:18px;padding:20px;box-shadow:0 30px 80px rgba(60,20,90,0.2);position:relative;">
+          <button onclick="closeLog()" aria-label="关闭" style="position:absolute;right:14px;top:14px;border:none;background:transparent;font-weight:700;color:#5a3f65;cursor:pointer">✕</button>
+          <h3 id="modalTitle" style="margin-top:6px;color:#3b2b4a"></h3>
+          <div id="modalDate" style="color:#6b5b7d;font-size:13px;margin-bottom:12px"></div>
+          <div id="modalContent" style="color:#5e5168;line-height:1.7"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container">
+      <h3 style="margin-bottom:18px">留言与评论</h3>
+      <div class="contact-wrap">
+        <div class="contact-card">
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <div style="display:flex;gap:12px;">
+              <div style="flex:1"><label class="visually-hidden">姓名</label><input type="text" id="name" placeholder="你的名字（必填）" required></div>
+              <div style="flex:1"><label class="visually-hidden">邮箱</label><input type="email" id="email" placeholder="邮箱（必填）" required></div>
+            </div>
+            <div style="margin-top:12px">
+              <textarea id="message" placeholder="写下你的需求/留言，我会在 1-2 个工作日内回复 😊" required></textarea>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+              <button class="btn" type="submit">发送消息</button>
+              <div style="color:#7a6a85;font-size:13px">或发送邮件：<strong style="color:#5a3f65">lhylucy9816@163.com</strong></div>
+            </div>
+          </form>
+        </div>
+
+        <div style="width:360px">
+          <div class="contact-card" style="padding:16px;">
+            <h4 style="margin-top:0">联系方式</h4>
+            <p style="color:#6c5a77;margin:6px 0">位于：猎户座-M42</p>
+            <p style="margin:6px 0;color:#6c5a77">期待你的来信。</p>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <div class="badge">Figma</div><div class="badge">SVG 动效</div><div class="badge">CSS / JS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container">
+      <div class="footer-inner">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-weight:700">Nacy的赛博世界</div>
+            <div style="color:#6b586f;font-size:13px">© 2026 Cahad — 所有内容归作者所有</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <a href="#" aria-label="微博" title="微博" style="color:var(--muted)">微博</a>
+            <a href="#" aria-label="Dribbble" title="Dribbble" style="color:var(--muted)">Nacy</a>
+            <a href="#" aria-label="邮箱" title="邮箱" style="color:var(--muted)">邮箱</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="toast" id="toast">消息已发送，感谢你的联系 ✨</div>
+
+  <script>
+    // Smooth scroll
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // Form submit demo
+    function submitForm(e){
+      e.preventDefault();
+      const t = document.getElementById('toast');
+      t.style.display='block';
+      t.style.opacity='1';
+      setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.style.display='none',300) }, 2600);
+      document.getElementById('contactForm').reset();
+    }
+
+    // Create twinkling stars in scene
+    (function createStars(){
+      const starWrap = document.getElementById('stars');
+      if(!starWrap) return;
+      const count = 28;
+      for(let i=0;i<count;i++){
+        const s = document.createElement('div');
+        s.className='star';
+        const left = Math.random()*100;
+        const top = Math.random()*100;
+        const size = 1 + Math.random()*3;
+        s.style.left = left + '%';
+        s.style.top = top + '%';
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.animationDuration = (2 + Math.random()*3) + 's';
+        s.style.animationDelay = Math.random()*3 + 's';
+        starWrap.appendChild(s);
+      }
+    })();
+
+    // Parallax subtle tilt based on mouse move
+    (function sceneParallax(){
+      const scene = document.getElementById('scene');
+      const items = [
+        document.getElementById('castle'),
+        document.getElementById('fairy'),
+        document.getElementById('crystals')
+      ];
+      if(!scene) return;
+      scene.addEventListener('mousemove', (e) => {
+        const r = scene.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        items.forEach((it, idx) => {
+          if(!it) return;
+          const depth = (idx+1) * 4;
+          const tx = px * depth;
+          const ty = py * depth * -1;
+          it.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${tx*0.4}deg)`;
+        });
+      });
+      scene.addEventListener('mouseleave', ()=>{
+        items.forEach(it=> { if(it) it.style.transform='none' });
+      });
+    })();
+
+    // Tiny logs content store (could be loaded from CMS/API)
+    const LOGS = {
+      1: {
+        title: "暮光城堡 · 调色与光影练习",
+        date: "2026-07-20",
+        content: "<p>本次尝试以低对比度的紫粉与奶油金为主，控制高光区域的柔化，重点在于云朵边框的渐变自然过渡与星光的层次感处理。</p><p>实践要点：</p><ul><li>以半透明的层叠渐变构建云朵边界，减少硬边缘。</li><li>将星光做成小尺寸重复图层，并使用不同透明度与模糊半径以增强深度感。</li><li>在页面实现时使用 CSS 的合成层（transform/opacity）来降低重绘成本。</li></ul>",
+      },
+      2: {
+        title: "网站首页交互微动效实现笔记",
+        date: "2026-06-04",
+        content: "<p>记录了如何在保证性能的前提下，实现星光 twinkle、鼠标视差与卡片悬浮光影。</p><p>要点：</p><ol><li>尽量使用 CSS 动画与 will-change 优化；JS 事件中只更新 transform。</li><li>星光数量可根据屏幕大小动态调整，移动端降低数量与复杂度。</li><li>卡片阴影使用渐进式模糊，避免频繁 layout 更新。</li></ol>",
+      },
+      3: {
+        title: "羽翼小仙子 · 角色设计草稿",
+        date: "2026-05-10",
+        content: "<p>角色草稿阶段关注体态与羽翼形态的可读性。共尝试了 6 个变体，最终选用轻薄羽毛、尾部轻卷形态。</p><p>灵感来源：经典绘本中针对轻盈感的笔触处理，配色上采用低对比的奶油金高光与淡紫阴影。</p>",
+      },
+      4: {
+        title: "创建梦幻素材库 · 光斑与云朵资源",
+        date: "2026-04-01",
+        content: "<p>整理并分类了可复用的星光/云朵/丝带/蝴蝶结素材，记录导出 web-friendly SVG/PNG 的流程与命名规范。</p><p>建议：为每个素材提供 1x/2x PNG 与独立 SVG，同时记录作者许可与用途说明。</p>",
+      }
+    };
+
+    // Modal open/close
+    function openLog(id){
+      const modal = document.getElementById('logModal');
+      const mTitle = document.getElementById('modalTitle');
+      const mDate = document.getElementById('modalDate');
+      const mContent = document.getElementById('modalContent');
+      const entry = LOGS[id];
+      if(!entry) return;
+      mTitle.innerHTML = entry.title;
+      mDate.innerHTML = entry.date;
+      mContent.innerHTML = entry.content;
+      modal.style.display = 'flex';
+      setTimeout(()=> modal.setAttribute('aria-hidden','false'), 30);
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLog(){
+      const modal = document.getElementById('logModal');
+      modal.setAttribute('aria-hidden','true');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // accessibility: close modal with Esc
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') {
+        const modal = document.getElementById('logModal');
+        if(modal && modal.style.display === 'flex') closeLog();
+      }
+      if(e.key === 'Tab') document.body.classList.add('user-tabbing');
+    });
+
+  </script>
+</body>
+</html>

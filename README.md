@@ -382,7 +382,7 @@
           </div>
           <div class="log-body">
             <h4 id="log-1-title" class="log-title">给千年后读到这段文字的你</h4>
-            <p class="log-excerpt">如果你正在读这段文字，说明Github的代码库已经过了一千年。不过你是人类、AI，还是其他什么存在，你好。</p>
+            <p class="log-excerpt">如果你正在读这段文字，说明Github存储的代码库已经过了一千年。不管你是人类、AI，还是其他什么存在--你好。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(1)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 2 分钟</div>
@@ -456,10 +456,10 @@
           </div>
           <div class="log-body">
             <h4 id="log-4-title" class="log-title">本段待补充</h4>
-            <p class="log-excerpt">整理并分类了可复用的星光/云朵/丝带/蝴蝶结素材，并记录了导出 web-friendly SVG/PNG 的流程与命名规范。</p>
+            <p class="log-excerpt">本段待补充。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(4)">阅读全文</button>
-              <div style="color:#7a6a85;font-size:13px">阅读需 2 分钟</div>
+              <div style="color:#7a6a85;font-size:13px">阅读需 0 分钟</div>
             </div>
           </div>
          <div class="log-thumb" aria-hidden="true">
@@ -604,9 +604,9 @@
     // Tiny logs content store (could be loaded from CMS/API)
     const LOGS = {
       1: {
-        title: "暮光城堡 · 调色与光影练习",
-        date: "2026-07-20",
-        content: "<p>本次尝试以低对比度的紫粉与奶油金为主，控制高光区域的柔化，重点在于云朵边框的渐变自然过渡与星光的层次感处理。</p><p>实践要点：</p><ul><li>以半透明的层叠渐变构建云朵边界，减少硬边缘。</li><li>将星光做成小尺寸重复图层，并使用不同透明度与模糊半径以增强深度感。</li><li>在页面实现时使用 CSS 的合成层（transform/opacity）来降低重绘成本。</li></ul>",
+        title: "给千年后读到这段文字的你",
+        date: "2026-07-27",
+        content: "<p>如果你正在读这段文字，说明Github存储的代码库已经过了一千年。不管你是人类、AI，还是其他什么存在--你好。</p><p>2026/7/27：</p><ul><li>全球人口约：80.2亿人。</li><li>我最焦虑的事情：明天吃什么。</li><li>我最相信的事情：明天会有太阳。</li><li>我写这篇日志的时候，窗外大约36摄氏度，阳光很刺眼。</li><li>如果你能看见这段文字，那么这篇日志就跨越了时间。</li></ul>",
       },
       2: {
         title: "网站首页交互微动效实现笔记",

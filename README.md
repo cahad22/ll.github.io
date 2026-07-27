@@ -157,6 +157,9 @@
     }
 
     .stars{position:absolute;inset:8px;pointer-events:none;z-index:3;border-radius:20px;overflow:hidden}
+    /* 隐藏右侧场景的星点（按用户要求） */
+    .stars { display: none !important; }
+
     .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85; /* twinkle removed */ animation: none;}
     /* @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }} */
 
@@ -628,7 +631,8 @@
       document.getElementById('contactForm').reset();
     }
 
-    // Create twinkling stars in scene (stars are still created, but twinkle animation disabled)
+    // Create stars: disabled (commented out) because .stars is hidden per user request
+    /*
     (function createStars(){
       const starWrap = document.getElementById('stars');
       if(!starWrap) return;
@@ -643,10 +647,11 @@
         s.style.top = top + '%';
         s.style.width = size + 'px';
         s.style.height = size + 'px';
-        // animation removed in CSS; keep small random delay/scale if needed later
+        // animation removed in CSS
         starWrap.appendChild(s);
       }
     })();
+    */
 
     // Parallax subtle tilt based on mouse move
     (function sceneParallax(){

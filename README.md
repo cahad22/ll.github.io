@@ -21,10 +21,7 @@
       --card-shadow: 0 12px 30px rgba(110,90,150,0.08);
       --soft-shadow: 0 8px 24px rgba(80,60,120,0.06);
       --muted: #6B6179;
-      --gold-tinge: rgba(255, 220, 140, 0.08);
-
       --bow-glow: rgba(255,220,240,0.9);
-      --candy-glow: rgba(255,250,255,0.95);
     }
 
     /* ========== 全局样式 ========== */
@@ -32,7 +29,7 @@
     body{
       margin:0;
       font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      /* 叠加珍珠白 -> 粉彩粉 -> 现有淡蓝紫，保留星光背景层次 */
+      /* 保持你原先的背景层次与配色 */
       background:
         radial-gradient(1200px 600px at 10% 10%, rgba(227,240,255,0.45), transparent 8%),
         radial-gradient(900px 500px at 90% 80%, rgba(241,229,255,0.35), transparent 10%),
@@ -58,7 +55,6 @@
       z-index:0;
       opacity:0.95;
     }
-    /* 细微颗粒噪点（轻微质感） */
     body::after{
       content:'';
       position:fixed;
@@ -159,6 +155,36 @@
     .stars{position:absolute;inset:8px;pointer-events:none;z-index:3;border-radius:20px;overflow:hidden}
     .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85;animation: twinkle 3.6s infinite ease-in-out;}
     @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }}
+
+    /* ========== 珍珠装饰（只在 scene 四周显示） ========== */
+    .pearls{position:absolute;inset:0;pointer-events:none;z-index:4;border-radius:18px;overflow:visible}
+    .pearl{
+      position:absolute;
+      border-radius:50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #FFF9F8 30%, #FFEAF4 65%, rgba(255,240,245,0.9) 100%);
+      box-shadow: 0 8px 20px rgba(255,200,235,0.14), inset 0 2px 6px rgba(255,255,255,0.7);
+      opacity:0.98;
+      filter: blur(0.1px);
+      transform: translate3d(0,0,0);
+      transition: transform .2s ease;
+      will-change: transform, opacity;
+      mix-blend-mode:screen;
+    }
+    .pearl::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.06));
+      opacity:0.65;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+    @keyframes pearl-pulse {
+      0% { transform: scale(0.98); opacity:0.92 }
+      50% { transform: scale(1.06); opacity:1 }
+      100% { transform: scale(0.98); opacity:0.92 }
+    }
 
     /* ========== Main Sections ========== */
     main{position:relative;z-index:2}
@@ -261,20 +287,14 @@
       .log-entry{flex-direction:column}
       .log-meta{flex-direction:row;width:auto}
       .log-thumb{width:100%;height:160px}
-      .scene-img{opacity:0.9}
+      .scene-img{opacity:0.95}
     }
 
     /* small helper */
     .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-    /* ============================
-       装饰性：果冻蝴蝶结与钻石糖果
-       - .enchanted : 用在按钮 / CTA / pill 等需要点缀的元素
-       - .card-accent : 用在卡片右上/右下的点缀
-       ============================ */
-
+    /* ========== 果冻蝴蝶结（保留） ========== */
     .enchanted{position:relative;overflow:visible}
-    /* 果冻蝴蝶结（左上角） */
     .enchanted::before{
       content:"";
       position:absolute;
@@ -290,65 +310,10 @@
       pointer-events:none;
     }
 
-    /* 闪耀钻石糖果（右上角） */
-    .enchanted::after{
-      content:"";
-      position:absolute;
-      right:-8px;
-      top:-8px;
-      width:18px;
-      height:18px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'><polygon points='9,1 13,6 9,17 5,6' fill='%23FFF8FF' stroke='%23FFD6E8' stroke-width='0.8' opacity='0.98' /><circle cx='9' cy='6' r='1.4' fill='%23FFF0FF' opacity='0.95' /></svg>");
-      background-size:contain;
-      background-repeat:no-repeat;
-      transform: rotate(10deg);
-      filter: drop-shadow(0 6px 12px rgba(240,220,255,0.12)) saturate(120%);
-      animation: candy-sparkle 2.2s infinite ease-in-out;
-      pointer-events:none;
-    }
-
-    @keyframes candy-sparkle {
-      0% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
-      50% { transform: rotate(12deg) scale(1.08); opacity:1; }
-      100% { transform: rotate(6deg) scale(0.92); opacity:0.85; }
-    }
-
-    /* card 角落点缀（右下） */
-    .card-accent{position:relative;overflow:visible}
-    .card-accent::after{
-      content:"";
-      position:absolute;
-      right:12px;
-      bottom:12px;
-      width:28px;
-      height:28px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><rect x='0' y='0' width='28' height='28' rx='6' fill='%23FFF6F9' opacity='0.95'/><polygon points='14,3 19,11 14,25 9,11' fill='%23FFEFFE' opacity='0.95' stroke='%23FFD6E8' stroke-width='0.6'/></svg>");
-      background-size:contain;
-      background-repeat:no-repeat;
-      filter: drop-shadow(0 10px 22px rgba(200,160,220,0.06));
-      pointer-events:none;
-      animation: float-accent 4s ease-in-out infinite;
-    }
-
-    @keyframes float-accent {
-      0% { transform: translateY(0); opacity:0.95 }
-      50% { transform: translateY(-6px); opacity:1 }
-      100% { transform: translateY(0); opacity:0.95 }
-    }
-
-    /* 让小 pill 也带点喜感 */
-    .pill.enchanted{padding-right:28px; padding-left:12px}
-    .pill.enchanted::after{ right:8px; top:50%; transform: translateY(-50%) rotate(20deg); }
-
-    /* 微调：CTA 特别发光 */
+    /* CTA 微调 */
     .cta.enchanted{
       box-shadow: 0 10px 32px rgba(255,192,220,0.12), 0 2px 6px rgba(0,0,0,0.03);
       background: linear-gradient(90deg, rgba(255,230,245,0.98), rgba(255,246,250,0.9));
-    }
-
-    /* 边框上的微弱珍珠高光 */
-    .nav-wrap, .about-card, .skill-card, .contact-card, .footer-inner, .log-entry{
-      border-image: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,245,250,0.35)) 1;
     }
 
   </style>
@@ -405,6 +370,9 @@
           <div class="scene" id="scene">
             <div class="stars" id="stars"></div>
 
+            <!-- 珍珠层：JS 会在此处生成若干珍珠，围绕场景图片四周自然排布 -->
+            <div class="pearls" id="pearls" aria-hidden="true"></div>
+
             <!-- 插入的场景图片：请将 lolo.png 放在与此 index.html 同一目录 -->
             <img id="sceneImage" class="scene-img" src="lolo.png" alt="场景插图 lolo" loading="eager" />
 
@@ -415,23 +383,17 @@
                   <linearGradient id="gSky" x1="0" x2="1"><stop offset="0" stop-color="#E9F6FF"/><stop offset="1" stop-color="#F9EEFF"/></linearGradient>
                 </defs>
                 <rect x="0" y="0" width="640" height="420" rx="24" fill="url(#gSky)" opacity="0.0"/>
-                <!-- decorative triangular path removed per request -->
               </svg>
             </div>
 
             <div class="crystals" id="crystals" aria-hidden="true">
-              <!-- crystals polygon removed (triangle removed) -->
               <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs><linearGradient id="c1" x1="0" x2="1"><stop offset="0" stop-color="#FFEFF8"/><stop offset="1" stop-color="#E7F7FF"/></linearGradient></defs>
-                <!-- polygon removed -->
               </svg>
             </div>
 
             <div class="fairy" id="fairy" aria-hidden="true">
-              <!-- circle removed (the round element above image) -->
-              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- circle removed -->
-              </svg>
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
 
           </div>
@@ -443,11 +405,10 @@
     <section id="about" aria-labelledby="about-h" class="container">
       <div class="about">
         <div class="avatar" aria-hidden="true">
-          <!-- 已替换为图片引用：请把你的图片保存为 avatar.png 并与 index.html 放在同一目录 -->
           <img src="avatar.png" alt="Cahad 头像" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;">
         </div>
 
-        <div class="about-card card-accent">
+        <div class="about-card">
           <h3 id="about-h">你好，我是Nacy。</h3>
           <p>物种：智人（Homo Sapiens)</p>
           <p>活跃时期：白天</p>
@@ -469,17 +430,17 @@
     <section id="skills" class="container">
       <h3 style="margin-bottom:18px">日志目录</h3>
       <div class="skills-grid" role="list">
-        <div class="skill-card card-accent" role="listitem">
+        <div class="skill-card" role="listitem">
           <h4>第一章：千年之后</h4>
           <p style="margin:6px 0;color:#6b5b7d">千年之后，如果人类文明还存在。</p>
           <div class="progress"><i style="width:92%"></i></div>
         </div>
-        <div class="skill-card card-accent" role="listitem">
+        <div class="skill-card" role="listitem">
           <h4>第二章：我的思考</h4>
           <p style="margin:6px 0;color:#6b5b7d">基于宇宙大爆炸对活着意义的思考和论证。</p>
           <div class="progress"><i style="width:86%"></i></div>
         </div>
-        <div class="skill-card card-accent" role="listitem">
+        <div class="skill-card" role="listitem">
           <h4>第三章：围棋。</h4>
           <p style="margin:6px 0;color:#6b5b7d">下围棋，但赢不了AI。</p>
           <div class="progress"><i style="width:88%"></i></div>
@@ -487,29 +448,28 @@
       </div>
     </section>
 
-    <!-- Logs (替代原 Works Gallery) -->
+    <!-- Logs -->
     <section id="logs" class="container" aria-labelledby="logs-h">
       <h3 id="logs-h" style="margin-bottom:18px">赛博日志</h3>
 
       <div class="logs-list" id="logsList">
-        <article class="log-entry card-accent" aria-labelledby="log-1-title">
+        <article class="log-entry" aria-labelledby="log-1-title">
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-07-27</div>
             <div class="log-tags">
-              <span class="pill enchanted">千年之后</span>
-              <span class="pill enchanted">人类文明</span>
+              <span class="pill">千年之后</span>
+              <span class="pill">人类文明</span>
             </div>
           </div>
           <div class="log-body">
             <h4 id="log-1-title" class="log-title">给千年后读到这段文字的你</h4>
             <p class="log-excerpt">如果你正在读这段文字，说明Github存储的代码库已经过了一千年。不管你是人类、AI，还是其他什么存在--你好。</p>
             <div class="log-actions">
-              <button class="btn enchanted" onclick="openLog(1)">阅读全文</button>
+              <button class="btn" onclick="openLog(1)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 2 分钟</div>
             </div>
           </div>
           <div class="log-thumb" aria-hidden="true">
-            <!-- decorative svg placeholder -->
             <svg width="100%" height="100%" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
               <defs><linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#FDEFF8"/><stop offset="1" stop-color="#E8F6FF"/></linearGradient></defs>
               <rect width="100%" height="100%" rx="8" fill="url(#lg1)"/>
@@ -518,19 +478,19 @@
           </div>
         </article>
 
-        <article class="log-entry card-accent" aria-labelledby="log-2-title">
+        <article class="log-entry" aria-labelledby="log-2-title">
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-06-04</div>
             <div class="log-tags">
-              <span class="pill enchanted">思考</span>
-              <span class="pill enchanted">宇宙</span>
+              <span class="pill">思考</span>
+              <span class="pill">宇宙</span>
             </div>
           </div>
           <div class="log-body">
             <h4 id="log-2-title" class="log-title">基于宇宙大爆炸对活着意义的思考和论证</h4>
             <p class="log-excerpt">记录了在 CSS 与少量 JS 中实现星光 twinkle、鼠标视差与卡片悬浮光影的实现思路与性能优化要点。</p>
             <div class="log-actions">
-              <button class="btn enchanted" onclick="openLog(2)">阅读全文</button>
+              <button class="btn" onclick="openLog(2)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 3 分钟</div>
             </div>
           </div>
@@ -542,19 +502,19 @@
           </div>
         </article>
 
-        <article class="log-entry card-accent" aria-labelledby="log-3-title">
+        <article class="log-entry" aria-labelledby="log-3-title">
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-07-10</div>
             <div class="log-tags">
-              <span class="pill enchanted">围棋</span>
-              <span class="pill enchanted">时光</span>
+              <span class="pill">围棋</span>
+              <span class="pill">时光</span>
             </div>
           </div>
           <div class="log-body">
             <h4 id="log-3-title" class="log-title">围棋</h4>
             <p class="log-excerpt">下围棋，但赢不了AI。</p>
             <div class="log-actions">
-              <button class="btn enchanted" onclick="openLog(3)">阅读全文</button>
+              <button class="btn" onclick="openLog(3)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 4 分钟</div>
             </div>
           </div>
@@ -566,19 +526,19 @@
           </div>
         </article>
 
-        <article class="log-entry card-accent" aria-labelledby="log-4-title">
+        <article class="log-entry" aria-labelledby="log-4-title">
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-04-01</div>
             <div class="log-tags">
-              <span class="pill enchanted">待补充</span>
-              <span class="pill enchanted">素材库</span>
+              <span class="pill">待补充</span>
+              <span class="pill">素材库</span>
             </div>
           </div>
           <div class="log-body">
             <h4 id="log-4-title" class="log-title">本段待补充</h4>
             <p class="log-excerpt">本段待补充。</p>
             <div class="log-actions">
-              <button class="btn enchanted" onclick="openLog(4)">阅读全文</button>
+              <button class="btn" onclick="openLog(4)">阅读全文</button>
               <div style="color:#7a6a85;font-size:13px">阅读需 0 分钟</div>
             </div>
           </div>
@@ -607,7 +567,7 @@
     <section id="contact" class="container">
       <h3 style="margin-bottom:18px">留言与评论</h3>
       <div class="contact-wrap">
-        <div class="contact-card card-accent">
+        <div class="contact-card">
           <form id="contactForm" onsubmit="submitForm(event)">
             <div style="display:flex;gap:12px;">
               <div style="flex:1"><label class="visually-hidden">姓名</label><input type="text" id="name" placeholder="你的名字（必填）" required></div>
@@ -617,14 +577,14 @@
               <textarea id="message" placeholder="写下你的需求/留言，我会在 1-2 个工作日内回复 😊" required></textarea>
             </div>
             <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
-              <button class="btn enchanted" type="submit">发送消息</button>
+              <button class="btn" type="submit">发送消息</button>
               <div style="color:#7a6a85;font-size:13px">或发送邮件：<strong style="color:#5a3f65">lhylucy9816@163.com</strong></div>
             </div>
           </form>
         </div>
 
         <div style="width:360px">
-          <div class="contact-card card-accent" style="padding:16px;">
+          <div class="contact-card" style="padding:16px;">
             <h4 style="margin-top:0">联系方式</h4>
             <p style="color:#6c5a77;margin:6px 0">位于：猎户座-M42</p>
             <p style="margin:6px 0;color:#6c5a77">期待你的来信。</p>
@@ -638,7 +598,7 @@
 
     <!-- Footer -->
     <footer class="container">
-      <div class="footer-inner card-accent">
+      <div class="footer-inner">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
           <div>
             <div style="font-weight:700">Nacy的赛博世界</div>
@@ -775,6 +735,54 @@
       }
       if(e.key === 'Tab') document.body.classList.add('user-tabbing');
     });
+
+    // ========== 珍珠生成（围绕 scene 图片边缘自然排列） ==========
+    function createPearls() {
+      const wrap = document.getElementById('pearls');
+      const scene = document.getElementById('scene');
+      if(!wrap || !scene) return;
+      // 清空已有
+      wrap.innerHTML = '';
+      const count = Math.max(8, Math.round((scene.clientWidth || 600) / 80)); // 根据场景宽度自适应数量
+      for (let i=0;i<count;i++){
+        const el = document.createElement('span');
+        el.className = 'pearl';
+        // 大小 8-26px
+        const size = 8 + Math.round(Math.random()*18);
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        // 选择侧边：top/right/bottom/left 偏向边缘放置（距离边缘 3%~9%）
+        const side = ['top','right','bottom','left'][Math.floor(Math.random()*4)];
+        let leftPct = 0, topPct = 0;
+        const edgeOffset = 3 + Math.random()*6; // percent from edge
+        if(side === 'top'){
+          topPct = edgeOffset;
+          leftPct = 5 + Math.random()*90;
+        } else if (side === 'bottom'){
+          topPct = 100 - edgeOffset;
+          leftPct = 5 + Math.random()*90;
+        } else if (side === 'left'){
+          leftPct = edgeOffset;
+          topPct = 5 + Math.random()*90;
+        } else {
+          leftPct = 100 - edgeOffset;
+          topPct = 5 + Math.random()*90;
+        }
+        el.style.left = leftPct + '%';
+        el.style.top = topPct + '%';
+        // 随机轻微旋转与浮动动画节奏
+        const dur = 3 + Math.random()*3;
+        el.style.animation = `pearl-pulse ${dur}s ease-in-out ${(Math.random()*2)}s infinite`;
+        // 轻微偏移，防止完全覆盖图像（向外小位移）
+        const translateX = (Math.random()-0.5) * 6; // px
+        const translateY = (Math.random()-0.5) * 6;
+        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        wrap.appendChild(el);
+      }
+    }
+    // 初始化并在窗口 resize 时重建（防止布局变化导致位置不合适）
+    window.addEventListener('load', createPearls);
+    window.addEventListener('resize', () => { clearTimeout(window._pearlsResize); window._pearlsResize = setTimeout(createPearls, 160); });
 
   </script>
 </body>

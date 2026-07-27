@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>童话梦境 · 个人日志与作品集</title>
+  <title>Nacy · 赛博世界</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -248,20 +248,20 @@
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-left">
-          <div class="kicker">梦幻 / 插画 / 记录</div>
-          <h1 class="hero-title">欢迎来到我的童话日记<br/><small style="font-weight:500;color:#6b5b79">用柔光与色彩记录创作背后的点滴</small></h1>
-          <p class="hero-sub">我是 Cahad，喜欢在作品之外记录灵感与制作过程。这里有创作碎片、技法笔记、项目进展与软萌手绘小故事。</p>
+          <div class="kicker">作者Nacy（大美女）</div>
+          <h1 class="hero-title">欢迎来到<br/><small style="font-weight:500;color:#6b5b79">我的赛博世界</small></h1>
+          <p class="hero-sub">本站建于2026/7/27。</p>
 
           <div class="hero-actions">
             <button class="btn" onclick="scrollToSection('logs')">查看日志</button>
-            <button class="btn secondary" onclick="scrollToSection('contact')">合作联系</button>
+            <button class="btn secondary" onclick="scrollToSection('contact')">留言联系</button>
           </div>
 
           <div class="ribbon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="filter:drop-shadow(0 4px 8px rgba(200,150,220,0.08));">
               <path d="M12 2l2.5 6H22l-5 3.8L18.8 22 12 17.8 5.2 22 7 11.8 2 8h7.5L12 2z" fill="#FFF0F8" opacity="0.95"/>
             </svg>
-            日志 · 灵感 · 制作笔记
+            日志记录
           </div>
         </div>
 
@@ -312,15 +312,18 @@
         </div>
 
         <div class="about-card">
-          <h3 id="about-h">你好，我是 Cahad — 记录创作与灵感的童话设计师</h3>
-          <p>在这里我把创作过程、素材笔记、项目进展与小心得写成短文，既是自我整理的工作簿，也是与读者分享创作思路的地方。</p>
+          <h3 id="about-h">你好，我是Nacy。</h3>
+          <p>物种：智人（Homo Sapiens)</p>
+          <p>活跃时期：白天</p>
+          <p>技术依赖：每天触摸玻璃屏幕超过6小时</p>
+          <p>日常消耗：每日约2000千卡食物</p>
 
           <div class="skill-badges" aria-hidden="true">
-            <div class="badge">创作日志</div>
-            <div class="badge">插画笔记</div>
-            <div class="badge">界面与动效</div>
-            <div class="badge">项目记录</div>
-            <div class="badge">故事化叙事</div>
+            <div class="badge">活着</div>
+            <div class="badge">吃饭</div>
+            <div class="badge">呼吸</div>
+            <div class="badge">睡觉</div>
+            <div class="badge">不思考</div>
           </div>
         </div>
       </div>
@@ -328,21 +331,21 @@
 
     <!-- Skills -->
     <section id="skills" class="container">
-      <h3 style="margin-bottom:18px">技能展示</h3>
+      <h3 style="margin-bottom:18px">日志目录</h3>
       <div class="skills-grid" role="list">
         <div class="skill-card" role="listitem">
-          <h4>插画 & 手绘</h4>
-          <p style="margin:6px 0;color:#6b5b7d">水彩质感、手绘线稿，构图/色彩/角色设计。</p>
+          <h4>第一章：千年之后</h4>
+          <p style="margin:6px 0;color:#6b5b7d">千年之后，如果人类文明还存在。</p>
           <div class="progress"><i style="width:92%"></i></div>
         </div>
         <div class="skill-card" role="listitem">
-          <h4>界面设计</h4>
-          <p style="margin:6px 0;color:#6b5b7d">卡片式布局、玻璃质感、低对比柔光配色。</p>
+          <h4>第二章：我的思考</h4>
+          <p style="margin:6px 0;color:#6b5b7d">基于宇宙大爆炸对活着意义的思考和论证。</p>
           <div class="progress"><i style="width:86%"></i></div>
         </div>
         <div class="skill-card" role="listitem">
-          <h4>前端实现</h4>
-          <p style="margin:6px 0;color:#6b5b7d">响应式布局、CSS 动画、交互微动效。</p>
+          <h4>第三章：诗神现世。</h4>
+          <p style="margin:6px 0;color:#6b5b7d">诗神（自封）的诗词鉴赏。</p>
           <div class="progress"><i style="width:88%"></i></div>
         </div>
       </div>
@@ -350,19 +353,19 @@
 
     <!-- Logs (替代原 Works Gallery) -->
     <section id="logs" class="container" aria-labelledby="logs-h">
-      <h3 id="logs-h" style="margin-bottom:18px">创作日志</h3>
+      <h3 id="logs-h" style="margin-bottom:18px">赛博日志</h3>
 
       <div class="logs-list" id="logsList">
         <article class="log-entry" aria-labelledby="log-1-title">
           <div class="log-meta" aria-hidden="true">
-            <div class="log-date">2026-07-20</div>
+            <div class="log-date">2026-07-27</div>
             <div class="log-tags">
-              <span class="pill">插画</span>
-              <span class="pill">水彩质感</span>
+              <span class="pill">千年之后</span>
+              <span class="pill">人类文明</span>
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-1-title" class="log-title">暮光城堡 · 调色与光影练习</h4>
+            <h4 id="log-1-title" class="log-title">千年之后，如果人类文明还存在</h4>
             <p class="log-excerpt">本次尝试以低对比度的紫粉与奶油金为主，控制高光区域的柔化，重点在于云朵边框的渐变自然过渡与星光的层次感处理。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(1)">阅读全文</button>
@@ -383,12 +386,12 @@
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-06-04</div>
             <div class="log-tags">
-              <span class="pill">项目</span>
-              <span class="pill">前端</span>
+              <span class="pill">思考</span>
+              <span class="pill">宇宙</span>
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-2-title" class="log-title">网站首页交互微动效实现笔记</h4>
+            <h4 id="log-2-title" class="log-title">基于宇宙大爆炸对活着意义的思考和论证</h4>
             <p class="log-excerpt">记录了在 CSS 与少量 JS 中实现星光 twinkle、鼠标视差与卡片悬浮光影的实现思路与性能优化要点。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(2)">阅读全文</button>
@@ -407,12 +410,12 @@
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-05-10</div>
             <div class="log-tags">
-              <span class="pill">插画</span>
-              <span class="pill">角色设计</span>
+              <span class="pill">诗神</span>
+              <span class="pill">诗歌</span>
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-3-title" class="log-title">羽翼小仙子 · 角色设计草稿</h4>
+            <h4 id="log-3-title" class="log-title">诗神（自封）的诗词鉴赏。</h4>
             <p class="log-excerpt">早期草稿主要围绕“轻盈”与“梦幻”两点，尝试不同羽翼造型与配色方案，记录了 6 版小稿的优缺点。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(3)">阅读全文</button>
@@ -431,12 +434,12 @@
           <div class="log-meta" aria-hidden="true">
             <div class="log-date">2026-04-01</div>
             <div class="log-tags">
-              <span class="pill">技法</span>
+              <span class="pill">待补充</span>
               <span class="pill">素材库</span>
             </div>
           </div>
           <div class="log-body">
-            <h4 id="log-4-title" class="log-title">创建梦幻素材库 · 光斑与云朵资源</h4>
+            <h4 id="log-4-title" class="log-title">本段待补充</h4>
             <p class="log-excerpt">整理并分类了可复用的星光/云朵/丝带/蝴蝶结素材，并记录了导出 web-friendly SVG/PNG 的流程与命名规范。</p>
             <div class="log-actions">
               <button class="btn" onclick="openLog(4)">阅读全文</button>
@@ -466,7 +469,7 @@
 
     <!-- Contact -->
     <section id="contact" class="container">
-      <h3 style="margin-bottom:18px">留言与合作</h3>
+      <h3 style="margin-bottom:18px">留言与评论</h3>
       <div class="contact-wrap">
         <div class="contact-card">
           <form id="contactForm" onsubmit="submitForm(event)">
@@ -479,7 +482,7 @@
             </div>
             <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
               <button class="btn" type="submit">发送消息</button>
-              <div style="color:#7a6a85;font-size:13px">或发送邮件：<strong style="color:#5a3f65">hello@yourdomain.com</strong></div>
+              <div style="color:#7a6a85;font-size:13px">或发送邮件：<strong style="color:#5a3f65">lhylucy9816@163.com</strong></div>
             </div>
           </form>
         </div>
@@ -487,8 +490,8 @@
         <div style="width:360px">
           <div class="contact-card" style="padding:16px;">
             <h4 style="margin-top:0">联系方式</h4>
-            <p style="color:#6c5a77;margin:6px 0">位于：温柔的童话小镇 · 远程合作优先</p>
-            <p style="margin:6px 0;color:#6c5a77">提供：插画委托 / 品牌 VI / 网页界面及动效实现</p>
+            <p style="color:#6c5a77;margin:6px 0">位于：猎户座-M42</p>
+            <p style="margin:6px 0;color:#6c5a77">期待你的来信。</p>
             <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
               <div class="badge">Figma</div><div class="badge">SVG 动效</div><div class="badge">CSS / JS</div>
             </div>
@@ -502,12 +505,12 @@
       <div class="footer-inner">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
           <div>
-            <div style="font-weight:700">童话梦境 · Cahad</div>
+            <div style="font-weight:700">Nacy的赛博世界</div>
             <div style="color:#6b586f;font-size:13px">© 2026 Cahad — 所有内容归作者所有</div>
           </div>
           <div style="display:flex;gap:10px;align-items:center">
             <a href="#" aria-label="微博" title="微博" style="color:var(--muted)">微博</a>
-            <a href="#" aria-label="Dribbble" title="Dribbble" style="color:var(--muted)">Dribbble</a>
+            <a href="#" aria-label="Dribbble" title="Dribbble" style="color:var(--muted)">Nacy</a>
             <a href="#" aria-label="邮箱" title="邮箱" style="color:var(--muted)">邮箱</a>
           </div>
         </div>

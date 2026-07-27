@@ -300,14 +300,8 @@
     <section id="about" aria-labelledby="about-h" class="container">
       <div class="about">
         <div class="avatar" aria-hidden="true">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="ag" x1="0" x2="1"><stop offset="0" stop-color="#FFF7FF"/><stop offset="1" stop-color="#FFEFD6"/></linearGradient></defs>
-            <rect width="100%" height="100%" rx="18" fill="url(#ag)"/>
-            <g transform="translate(30,28)" fill="#5F4967">
-              <ellipse cx="70" cy="60" rx="24" ry="28" fill="#fff7fb" />
-              <path d="M50 100 q40 36 80 0" fill="#FFEFEF" opacity="0.9"/>
-            </g>
-          </svg>
+          <!-- 已替换为图片引用：请把你的图片保存为 avatar.png 并与 index.html 放在同一目录 -->
+          <img src="avatar.png" alt="Cahad 头像" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;">
         </div>
 
         <div class="about-card">

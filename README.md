@@ -17,11 +17,14 @@
       --pastel-lav: #EBDDFB;
       --cream-gold: #F6E9D6;
       --accent: #F7C9F1;
-      --glass: rgba(255,255,255,0.55);
+      --glass-tint: rgba(255,248,250,0.55);
+      --glass-highlight: rgba(255,255,255,0.85);
       --card-shadow: 0 12px 30px rgba(110,90,150,0.08);
       --soft-shadow: 0 8px 24px rgba(80,60,120,0.06);
       --muted: #6B6179;
       --bow-glow: rgba(255,220,240,0.9);
+      --rabbit-glow: rgba(255,200,230,0.12);
+      --ripple-pink: rgba(255,200,230,0.95);
     }
 
     /* ========== 全局样式 ========== */
@@ -29,7 +32,7 @@
     body{
       margin:0;
       font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      /* 保持你原先的背景层次与配色 */
+      /* 背景层次保持不变 */
       background:
         radial-gradient(1200px 600px at 10% 10%, rgba(227,240,255,0.45), transparent 8%),
         radial-gradient(900px 500px at 90% 80%, rgba(241,229,255,0.35), transparent 10%),
@@ -121,9 +124,48 @@
     .hero-title{margin-top:18px;font-size:46px;line-height:1.05;letter-spacing:-1px;color:#392a4d;font-weight:700}
     .hero-sub{margin-top:12px;color:#675e78;max-width:46ch}
     .hero-actions{margin-top:22px;display:flex;gap:12px;align-items:center}
-    .btn{padding:12px 18px;border-radius:14px;border:none;cursor:pointer;font-weight:600;background:linear-gradient(90deg, rgba(231,211,255,0.85), rgba(255,240,245,0.72));box-shadow: 0 8px 26px rgba(170,120,220,0.08);transition:all .28s cubic-bezier(.2,.9,.2,1);position:relative;overflow:visible;}
+    .btn{
+      padding:12px 18px;border-radius:14px;border:none;cursor:pointer;font-weight:600;
+      background:linear-gradient(90deg, rgba(231,211,255,0.85), rgba(255,240,245,0.72));
+      box-shadow: 0 8px 26px rgba(170,120,220,0.08);
+      transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s, filter .18s;
+      position:relative;overflow:hidden;will-change:transform,box-shadow;
+    }
     .btn:hover{ transform:translateY(-6px); box-shadow: 0 18px 40px rgba(180,120,230,0.12)}
     .btn.secondary{ background: linear-gradient(90deg, rgba(255,255,255,0.65), rgba(255,255,255,0.4)); border:1px solid rgba(255,255,255,0.6); color:#5a4666; }
+
+    /* 按下态：微缩并出现粉色光晕（保持按钮在上层） */
+    .btn.pressed,
+    .btn:active{
+      transform: translateY(2px) scale(0.96) !important;
+      box-shadow: 0 6px 18px rgba(180,110,200,0.12);
+      filter: drop-shadow(0 8px 28px rgba(255,200,230,0.08));
+    }
+    /* 粉色光晕（环绕） */
+    .btn::after{
+      content:'';
+      position:absolute;inset:-8px;border-radius:18px;pointer-events:none;
+      background: radial-gradient(circle at 50% 20%, rgba(255,220,240,0.24), transparent 40%);
+      opacity:0;transition:opacity .18s;
+      z-index:0;
+    }
+    .btn.pressed::after{ opacity:1; }
+
+    /* 涟漪效果占位（JS 动态注入 span.ripple） */
+    .btn .ripple{
+      position:absolute;border-radius:50%;transform:translate(-50%,-50%) scale(0.2);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4)), linear-gradient(90deg, rgba(255,200,230,0.9), rgba(255,150,210,0.6));
+      pointer-events:none;opacity:0.9;mix-blend-mode:screen;
+      will-change:transform,opacity;
+      box-shadow: 0 8px 28px rgba(255,180,220,0.12);
+      animation: ripple-grow 700ms cubic-bezier(.2,.9,.2,1);
+      z-index:1;
+    }
+    @keyframes ripple-grow{
+      0%{ transform: translate(-50%,-50%) scale(0.18); opacity:0.8; }
+      40%{ transform: translate(-50%,-50%) scale(0.9); opacity:0.9; }
+      100%{ transform: translate(-50%,-50%) scale(2.8); opacity:0; }
+    }
 
     .ribbon{margin-top:18px;width:220px;height:36px;border-radius:999px;background: linear-gradient(90deg, rgba(255,245,238,0.8), rgba(255,240,250,0.6));box-shadow: 0 8px 20px rgba(200,160,220,0.06);display:flex;align-items:center;justify-content:center;color:#6b5571;font-size:13px;gap:8px;}
 
@@ -156,34 +198,51 @@
     .star{position:absolute;width:4px;height:4px;background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.2) 60%, transparent 100%);border-radius:50%;filter:blur(0.6px);opacity:0.85;animation: twinkle 3.6s infinite ease-in-out;}
     @keyframes twinkle {0%,100%{ transform:scale(0.6); opacity:0.6 }50%{ transform:scale(1.8); opacity:1 }}
 
-    /* ========== 珍珠装饰（只在 scene 四周显示） ========== */
-    .pearls{position:absolute;inset:0;pointer-events:none;z-index:4;border-radius:18px;overflow:visible}
-    .pearl{
-      position:absolute;
-      border-radius:50%;
-      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #FFF9F8 30%, #FFEAF4 65%, rgba(255,240,245,0.9) 100%);
-      box-shadow: 0 8px 20px rgba(255,200,235,0.14), inset 0 2px 6px rgba(255,255,255,0.7);
-      opacity:0.98;
-      filter: blur(0.1px);
-      transform: translate3d(0,0,0);
-      transition: transform .2s ease;
-      will-change: transform, opacity;
-      mix-blend-mode:screen;
-    }
-    .pearl::after{
-      content:'';
-      position:absolute;
-      inset:0;
-      border-radius:50%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.06));
-      opacity:0.65;
+    /* ========== 珍珠装饰已被移除（对应的 HTML / JS 也移除） ========== */
+
+    /* ========== 玻璃质感立体兔子（背景装饰） ========== */
+    .rabbit-viewport {
+      position:fixed;
+      z-index:1; /* 放在 body::before/after (z=0) 与 .container (z=2) 之间 */
       pointer-events:none;
-      mix-blend-mode:screen;
+      top:0; left:0; right:0; bottom:0;
+      overflow:visible;
     }
-    @keyframes pearl-pulse {
-      0% { transform: scale(0.98); opacity:0.92 }
-      50% { transform: scale(1.06); opacity:1 }
-      100% { transform: scale(0.98); opacity:0.92 }
+    .rabbit {
+      position:fixed;
+      pointer-events:none;
+      will-change:transform,opacity;
+      transform-origin:center;
+      filter: drop-shadow(0 18px 40px rgba(90,60,120,0.08));
+      mix-blend-mode:screen;
+      opacity:0.95;
+      transition:transform .5s cubic-bezier(.2,.9,.2,1), opacity .6s;
+    }
+    /* glassy svg sizing */
+    .rabbit svg { display:block; width:100%; height:100%; }
+
+    /* subtle bob + rotate for 3D feel */
+    @keyframes rabbit-bob {
+      0% { transform: translateY(0) rotate3d(0,1,0,0deg) translateZ(0); }
+      50% { transform: translateY(-6px) rotate3d(0,1,0,1deg) translateZ(6px); }
+      100% { transform: translateY(0) rotate3d(0,1,0,0deg) translateZ(0); }
+    }
+    .rabbit--float { animation: rabbit-bob 6.8s ease-in-out infinite; }
+
+    /* highlight rim + inner glossy */
+    .rabbit .glass-fill { fill: url(#rabbitGlassGrad); }
+    .rabbit .glass-highlight { fill: rgba(255,255,255,0.6); mix-blend-mode:screen; opacity:0.65; }
+
+    /* small soft shadow under rabbit (keeps it subtle) */
+    .rabbit .ground-shadow {
+      position:absolute; left:50%; transform:translateX(-50%); bottom:-6px;
+      width:60%; height:18%; border-radius:50%; background: radial-gradient(ellipse at center, rgba(0,0,0,0.08), transparent 60%);
+      filter: blur(6px); opacity:0.9;
+    }
+
+    /* hide rabbits on tiny screens (avoid overlap) */
+    @media (max-width:720px){
+      .rabbit { display:none; }
     }
 
     /* ========== Main Sections ========== */
@@ -283,7 +342,6 @@
       .nav-wrap{padding:8px}
       .hero-title{font-size:32px}
       .skills-grid{grid-template-columns:1fr}
-      .container{padding:0 14px}
       .log-entry{flex-direction:column}
       .log-meta{flex-direction:row;width:auto}
       .log-thumb{width:100%;height:160px}
@@ -344,6 +402,9 @@
     </div>
   </header>
 
+  <!-- 背景兔子容器（通过 JS 动态插入具体 rabbit 元素并计算放置位置，避免遮挡正文） -->
+  <div class="rabbit-viewport" aria-hidden="true" id="rabbitViewport"></div>
+
   <!-- Hero Banner -->
   <main>
     <section class="hero">
@@ -370,14 +431,10 @@
           <div class="scene" id="scene">
             <div class="stars" id="stars"></div>
 
-            <!-- 珍珠层：JS 会在此处生成若干珍珠，围绕场景图片四周自然排布 -->
-            <div class="pearls" id="pearls" aria-hidden="true"></div>
-
             <!-- 插入的场景图片：请将 lolo.png 放在与此 index.html 同一目录 -->
             <img id="sceneImage" class="scene-img" src="lolo.png" alt="场景插图 lolo" loading="eager" />
 
             <div class="castle" id="castle" aria-hidden="true">
-              <!-- simplified castle svg (overlay) - triangular path removed -->
               <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 <defs>
                   <linearGradient id="gSky" x1="0" x2="1"><stop offset="0" stop-color="#E9F6FF"/><stop offset="1" stop-color="#F9EEFF"/></linearGradient>
@@ -634,7 +691,7 @@
       document.getElementById('contactForm').reset();
     }
 
-    // Create twinkling stars in scene
+    // Create twinkling stars in scene (unchanged)
     (function createStars(){
       const starWrap = document.getElementById('stars');
       if(!starWrap) return;
@@ -655,7 +712,7 @@
       }
     })();
 
-    // Parallax subtle tilt based on mouse move
+    // Parallax subtle tilt based on mouse move (unchanged)
     (function sceneParallax(){
       const scene = document.getElementById('scene');
       const items = [
@@ -681,7 +738,7 @@
       });
     })();
 
-    // Tiny logs content store (could be loaded from CMS/API)
+    // Tiny logs content store (unchanged)
     const LOGS = {
       1: {
         title: "给千年后读到这段文字的你",
@@ -705,7 +762,7 @@
       }
     };
 
-    // Modal open/close
+    // Modal open/close (unchanged)
     function openLog(id){
       const modal = document.getElementById('logModal');
       const mTitle = document.getElementById('modalTitle');
@@ -736,53 +793,186 @@
       if(e.key === 'Tab') document.body.classList.add('user-tabbing');
     });
 
-    // ========== 珍珠生成（围绕 scene 图片边缘自然排列） ==========
-    function createPearls() {
-      const wrap = document.getElementById('pearls');
-      const scene = document.getElementById('scene');
-      if(!wrap || !scene) return;
-      // 清空已有
-      wrap.innerHTML = '';
-      const count = Math.max(8, Math.round((scene.clientWidth || 600) / 80)); // 根据场景宽度自适应数量
-      for (let i=0;i<count;i++){
-        const el = document.createElement('span');
-        el.className = 'pearl';
-        // 大小 8-26px
-        const size = 8 + Math.round(Math.random()*18);
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        // 选择侧边：top/right/bottom/left 偏向边缘放置（距离边缘 3%~9%）
-        const side = ['top','right','bottom','left'][Math.floor(Math.random()*4)];
-        let leftPct = 0, topPct = 0;
-        const edgeOffset = 3 + Math.random()*6; // percent from edge
-        if(side === 'top'){
-          topPct = edgeOffset;
-          leftPct = 5 + Math.random()*90;
-        } else if (side === 'bottom'){
-          topPct = 100 - edgeOffset;
-          leftPct = 5 + Math.random()*90;
-        } else if (side === 'left'){
-          leftPct = edgeOffset;
-          topPct = 5 + Math.random()*90;
-        } else {
-          leftPct = 100 - edgeOffset;
-          topPct = 5 + Math.random()*90;
-        }
-        el.style.left = leftPct + '%';
-        el.style.top = topPct + '%';
-        // 随机轻微旋转与浮动动画节奏
-        const dur = 3 + Math.random()*3;
-        el.style.animation = `pearl-pulse ${dur}s ease-in-out ${(Math.random()*2)}s infinite`;
-        // 轻微偏移，防止完全覆盖图像（向外小位移）
-        const translateX = (Math.random()-0.5) * 6; // px
-        const translateY = (Math.random()-0.5) * 6;
-        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
-        wrap.appendChild(el);
+    // ========== 替代珍珠：动态生成“玻璃兔子”并严格放置在容器外侧（防止遮挡） ==========
+    (function createRabbits(){
+      const viewport = document.getElementById('rabbitViewport');
+      if(!viewport) return;
+
+      // 清理已有
+      viewport.innerHTML = '';
+
+      // 兔子模板 SVG（glassy 风格，带渐变与高光）
+      const rabbitSVG = (size) => {
+        const svg = `
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="rabbitGlassGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#FFF9FB" />
+              <stop offset="1" stop-color="#FFEFF8" />
+            </linearGradient>
+            <linearGradient id="rabbitGloss" x1="0" x2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,0.9)" />
+              <stop offset="1" stop-color="rgba(255,255,255,0.2)" />
+            </linearGradient>
+            <filter id="rabbitSoftShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#B27BCA" flood-opacity="0.08"/>
+            </filter>
+          </defs>
+
+          <!-- glass body -->
+          <g filter="url(#rabbitSoftShadow)">
+            <path class="glass-fill" d="M100 28c8-18 28-32 44-18 18 16 8 46-2 60 26 8 36 36 14 72-22 36-80 36-110 8-30-28-24-84 18-104 0 0 6-28 36-30z" fill="url(#rabbitGlassGrad)"/>
+            <!-- inner glossy highlight -->
+            <path class="glass-highlight" d="M80 36c18-8 42-6 62 6 0 0-10 10-26 6-24-6-34-2-36-12z" fill="url(#rabbitGloss)" opacity="0.7"/>
+            <!-- eye -->
+            <circle cx="118" cy="84" r="4" fill="#5b4a67" opacity="0.9"/>
+            <!-- ear shine -->
+            <ellipse cx="132" cy="18" rx="10" ry="22" fill="rgba(255,255,255,0.5)" opacity="0.55" transform="rotate(-18 132 18)"/>
+          </g>
+        </svg>`;
+        return svg;
+      };
+
+      // Choose a small set of rabbits, sizes and side placement. We'll compute positions so they sit outside main .container.
+      const container = document.querySelector('.container');
+      const safeRects = [];
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        // store left and right gutter x positions (outside container)
+        safeRects.push({side:'left', x: Math.max(12, rect.left - 120), topMin: 140, topMax: window.innerHeight - 180});
+        safeRects.push({side:'right', x: Math.min(window.innerWidth - 120, rect.right + 20), topMin: 120, topMax: window.innerHeight - 220});
+      } else {
+        safeRects.push({side:'left', x: 24, topMin: 120, topMax: window.innerHeight - 220});
+        safeRects.push({side:'right', x: window.innerWidth - 140, topMin: 120, topMax: window.innerHeight - 220});
       }
-    }
-    // 初始化并在窗口 resize 时重建（防止布局变化导致位置不合适）
-    window.addEventListener('load', createPearls);
-    window.addEventListener('resize', () => { clearTimeout(window._pearlsResize); window._pearlsResize = setTimeout(createPearls, 160); });
+
+      // rabbit configurations
+      const rabbits = [
+        {side:'left', size: 160, topPct: 0.18, floatDelay: '0s', floatDur: 7.2},
+        {side:'right', size: 120, topPct: 0.36, floatDelay: '0.9s', floatDur: 6.6},
+        {side:'left', size: 96, topPct: 0.68, floatDelay: '1.6s', floatDur: 8.0}
+      ];
+
+      rabbits.forEach((r, idx) => {
+        const el = document.createElement('div');
+        el.className = 'rabbit rabbit--float';
+        el.style.width = r.size + 'px';
+        el.style.height = Math.round(r.size * 1.0) + 'px';
+        el.style.opacity = 0.94 - idx*0.06;
+        el.style.transitionDelay = (idx*0.06) + 's';
+        // compute x,y according to container bounds to ensure rabbits stay in gutter
+        let x;
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          if (r.side === 'left') {
+            x = Math.max(8, rect.left - (r.size * 0.6));
+            el.style.left = (x < 12 ? 8 : x) + 'px';
+          } else {
+            x = Math.min(window.innerWidth - r.size - 8, rect.right + (r.size * 0.18));
+            el.style.left = (x) + 'px';
+          }
+        } else {
+          if (r.side === 'left') el.style.left = '12px';
+          else el.style.right = '12px';
+        }
+        // top: use percentage of viewport height but clamp to safe vertical region
+        const vh = window.innerHeight;
+        const top = Math.round(Math.max(120, Math.min(vh - 160, (r.topPct || 0.4) * vh)));
+        el.style.top = top + 'px';
+
+        // z-index layering subtle (left rabbits slightly behind)
+        el.style.zIndex = 1 + idx;
+
+        // animation timing
+        el.style.animationDuration = (r.floatDur || 7.0) + 's';
+        el.style.animationDelay = r.floatDelay || '0s';
+
+        // insert the svg
+        el.innerHTML = rabbitSVG(r.size);
+
+        // add small rotation & 3D transform for depth
+        const tilt = (idx % 2 === 0) ? -6 : 8;
+        el.style.transform = `perspective(800px) rotateY(${tilt}deg) translateZ(${8+idx*2}px)`;
+
+        viewport.appendChild(el);
+      });
+
+      // Keep rabbits responsive on resize: reposition
+      function repositionRabbits(){
+        const els = viewport.querySelectorAll('.rabbit');
+        const cont = document.querySelector('.container');
+        els.forEach((el, i) => {
+          const size = parseInt(getComputedStyle(el).width,10) || 120;
+          if (cont) {
+            const rect = cont.getBoundingClientRect();
+            // alternate left/right placement to stay in gutters
+            if (i % 2 === 0) {
+              const x = Math.max(8, rect.left - (size * 0.6));
+              el.style.left = (x < 12 ? 8 : x) + 'px';
+              el.style.right = 'auto';
+            } else {
+              const x = Math.min(window.innerWidth - size - 8, rect.right + (size * 0.18));
+              el.style.left = (x) + 'px';
+              el.style.right = 'auto';
+            }
+            // vertical clamp
+            const top = parseInt(el.style.top,10) || 140;
+            const newTop = Math.round(Math.max(100, Math.min(window.innerHeight - 160, top)));
+            el.style.top = newTop + 'px';
+          } else {
+            el.style.left = (i % 2 === 0) ? '12px' : 'auto';
+            if (i % 2 !== 0) el.style.right = '12px';
+          }
+        });
+      }
+
+      window.addEventListener('resize', () => { clearTimeout(window._rabbitResize); window._rabbitResize = setTimeout(repositionRabbits, 160); });
+
+    })();
+
+    // ========== 按钮的涟漪与按下态处理（响应式、性能优化） ==========
+    (function enhanceButtonRipples(){
+      const buttons = Array.from(document.querySelectorAll('.btn'));
+      buttons.forEach(btn=>{
+        // pointerdown: create ripple + pressed class
+        btn.addEventListener('pointerdown', (e)=>{
+          // pressed visual
+          btn.classList.add('pressed');
+
+          // create ripple element at pointer within button
+          const rect = btn.getBoundingClientRect();
+          const rx = e.clientX - rect.left;
+          const ry = e.clientY - rect.top;
+          const size = Math.max(rect.width, rect.height) * 1.8;
+          const r = document.createElement('span');
+          r.className = 'ripple';
+          r.style.width = r.style.height = size + 'px';
+          r.style.left = rx + 'px';
+          r.style.top = ry + 'px';
+          // append and auto-remove after animation
+          btn.appendChild(r);
+          setTimeout(()=> {
+            r.style.opacity = '0';
+            try { r.remove(); } catch(e){}
+          }, 800);
+        });
+
+        // pointerup / pointercancel => remove pressed
+        const upHandler = () => {
+          btn.classList.remove('pressed');
+        };
+        btn.addEventListener('pointerup', upHandler);
+        btn.addEventListener('pointercancel', upHandler);
+        btn.addEventListener('pointerleave', upHandler);
+      });
+    })();
+
+    // ========== 其他初始化（如需） ==========
+    // Ensure rabbits are positioned correctly after layout and on load (in case container size is delayed)
+    window.addEventListener('load', () => {
+      // trigger resize handler to reposition rabbits if necessary
+      setTimeout(()=> window.dispatchEvent(new Event('resize')), 120);
+    });
 
   </script>
 </body>
